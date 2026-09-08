@@ -70,7 +70,7 @@ function Signup(){
             setwrong(true)
         }
 
-        const signupdetails=axios.post("http://localhost:3000/signup",{"name":name, "emailid":newemail, "passid":password})
+        const signupdetails=axios.post("bulk-mail-fswd.vercel.app/signup",{"name":name, "emailid":newemail, "passid":password})
 signupdetails.then(function(data){
         if(data.data){
             navigate("/login")

@@ -55,7 +55,7 @@ function Login(){
         setcolor(true)
         setpara(false)
         seterror(false)
-        const logindetails=axios.post("http://localhost:3000/login",{"emailid":email, "passid":pass})
+        const logindetails=axios.post("bulk-mail-fswd.vercel.app/login",{"emailid":email, "passid":pass})
         logindetails.then(function(data){
             if(data.data.success){
               // localStorage.setItem("userName", data.data.name)
