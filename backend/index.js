@@ -2,10 +2,16 @@ const express=require("express")
 const cors=require("cors")
 const nodemailer=require("nodemailer")
 const mongoose=require("mongoose")
-const dns = require("dns");
-require("dotenv").config()
+// const dns = require("dns");
+// require("dotenv").config()
 
-dns.setServers(["8.8.8.8", "8.8.4.4"]);
+if(!process.env.VERCEL){
+    const dns = require("dns")
+    dns.setServers(["8.8.8.8", "8.8.4.4"])
+}
+
+
+// dns.setServers(["8.8.8.8", "8.8.4.4"]);
 
 const app=express()
 
