@@ -125,12 +125,20 @@ function Login(){
                 ${showpass ? "fa-regular fa-eye-slash" :"fa-regular fa-eye"}`}></i>
                 ) : null
             }
+             {/* <i className="fa-solid fa-eye absolute right-4 top-1/2 -translate-y-1/2 text-gray-500"></i> */}
 
             <input
               type={showpass? "text" : "password"} value={pass} onChange={handlePass}
               placeholder="Enter your password"
               className="w-full border border-gray-300 rounded-lg py-2.5 sm:py-3 pl-11 pr-11 text-sm sm:text-base outline-none focus:ring-2 focus:ring-indigo-500"
             />
+            {/* {
+                pass? (
+             <i onClick={handleShow}  
+             className={`fa-regular fa-eye text-gray-500 absolute right-3 bottom-5
+                ${showpass ? "fa-regular fa-eye-slash" :"fa-regular fa-eye"}`}></i>
+                ) : null
+            } */}
 
           </div>
 

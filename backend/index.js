@@ -5,6 +5,8 @@ const cors=require("cors")
 const nodemailer=require("nodemailer")
 const mongoose=require("mongoose")
 
+// Only override DNS servers locally — Vercel's serverless sandbox
+// often blocks this and crashes the whole function on cold start
 if(!process.env.VERCEL){
     const dns = require("dns")
     dns.setServers(["8.8.8.8", "8.8.4.4"])
@@ -23,11 +25,15 @@ const passid=req.body.passid
 
 User.create({name:name, emailid:emailid, passid:passid})
   .then(function(){
-    res.send(true)
+    res.json({success:true})
   })
   .catch(function(err){
     console.log(err)
-    res.send(false)
+    if(err.code === 11000){
+        res.json({success:false, error:"This email is already registered. Please log in instead."})
+    } else{
+        res.json({success:false, error:"Signup failed. Please try again."})
+    }
   })
 
 })
