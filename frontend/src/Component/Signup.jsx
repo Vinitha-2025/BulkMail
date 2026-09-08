@@ -56,6 +56,10 @@ function Signup(){
             return
         }
 
+    const handleLogin=()=>{
+        navigate("/login")
+    }
+
         if (password === "" || conpass === "") {
            setempty(true)
            return
@@ -148,7 +152,6 @@ signupdetails.then(function(data){
           <div className="relative">
             <i className="fa-solid fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-gray-500"></i>
 
-            {/* <i className="fa-solid fa-eye absolute right-4 top-1/2 -translate-y-1/2 text-gray-500"></i> */}
 
             <input
               type={showpass? "text" : "password"} value={password} onChange={handlePassword}
@@ -172,7 +175,6 @@ signupdetails.then(function(data){
           <div className="relative">
             <i className="fa-solid fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-gray-500"></i>
 
-            {/* <i className="fa-solid fa-eye absolute right-4 top-1/2 -translate-y-1/2 text-gray-500"></i> */}
 
             <input
               type={showconpass? "text" : "password"} value={conpass} onChange={handleConfirm}
@@ -218,7 +220,9 @@ signupdetails.then(function(data){
 
           {/* Signup */}
           <p className="text-sm sm:text-base">
-            Already have an account? <span className="text-blue-800 font-semibold"> Login
+            Already have an account? 
+            <span className="text-blue-800 font-semibold">
+              <span onClick={handleLogin} className=" cursor-pointer"> Login </span>
             </span>
           </p>
 
