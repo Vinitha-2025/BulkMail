@@ -37,7 +37,7 @@ function Dashboard(){
   useEffect(function(){
   const savedEmail=localStorage.getItem("userEmail")
   if(savedEmail){
-    axios.get("bulk-mail-fswd.vercel.app/user/"+savedEmail)
+    axios.get("https://bulk-mail-fswd.vercel.app/user/"+savedEmail)
     .then(function(data){
       setUserName(data.data.name)
       setUserEmail(data.data.emailid)
@@ -68,7 +68,7 @@ function Dashboard(){
 
   function send(){
     setStatus(true)
-    axios.post("bulk-mail-fswd.vercel.app/sendemail",{msg:msg, emailList:emailList, subject:subject, emailTo:emailTo})
+    axios.post("https://bulk-mail-fswd.vercel.app/sendemail",{msg:msg, emailList:emailList, subject:subject, emailTo:emailTo})
     .then(function(data){
       if(data.data === true){
         setStatus(false)

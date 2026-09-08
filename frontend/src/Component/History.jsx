@@ -24,7 +24,7 @@ function History(){
   useEffect(function(){
   const savedEmail=localStorage.getItem("userEmail")
   if(savedEmail){
-    axios.get("bulk-mail-fswd.vercel.app/user/"+savedEmail)
+    axios.get("https://bulk-mail-fswd.vercel.app/user/"+savedEmail)
     .then(function(data){
       setUserName(data.data.name)
       setUserEmail(data.data.emailid)
@@ -37,7 +37,7 @@ function History(){
 
   function fetchHistory(){
     setLoading(true)
-    axios.get("bulk-mail-fswd.vercel.app/emailhistory")
+    axios.get("https://bulk-mail-fswd.vercel.app/emailhistory")
     .then(function(data){
       setHistory(data.data)
       setLoading(false)
