@@ -45,7 +45,7 @@ function Signup(){
     }
 
     const handleCheck=()=>{
-        const emailRegex = /^[a-zA-Z0-9]+@gmail\.com$/
+        const emailRegex=/^[a-zA-Z0-9]+@gmail\.com$/
 
         if(emailRegex.test(newemail)){
             setcolor(true)
