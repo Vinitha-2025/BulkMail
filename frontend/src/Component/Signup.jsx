@@ -19,6 +19,7 @@ function Signup(){
     const[para,setpara]=useState(false)
     const[wrongpass,setwrong]=useState(true)
     const[empty,setempty]=useState(false)
+    const[signupError,setsignupError]=useState("")
 
     const handleName=(e)=>{
         setName(e.target.value)
@@ -45,6 +46,7 @@ function Signup(){
     }
 
     const handleCheck=()=>{
+        setsignupError("")
         const emailRegex=/^[a-zA-Z0-9]+@gmail\.com$/
 
         if(emailRegex.test(newemail)){
@@ -71,16 +73,16 @@ function Signup(){
         }
 
         const signupdetails=axios.post("https://bulk-mail-fswd.vercel.app/signup",{"name":name, "emailid":newemail, "passid":password})
-signupdetails.then(function(data){
-        if(data.data){
-            navigate("/login")
-        } else{
-            setpara(true)
-        }
-}).catch(function(err){
-        console.log(err)
-        setpara(true)
-})
+        signupdetails.then(function(data){
+                if(data.data.success){
+                    navigate("/login")
+                } else{
+                    setsignupError(data.data.error || "Signup failed. Please try again.")
+                }
+        }).catch(function(err){
+                console.log(err)
+                setsignupError("Something went wrong. Please try again.")
+        })
     }
     return(
         <div
@@ -196,6 +198,11 @@ signupdetails.then(function(data){
                 empty ? (<p className="text-red-600 mt-2 text-left">
                      <i className="fa-regular fa-circle-xmark text-red-600 font-light"> </i>
                 Please enter a password</p>) : null
+            }
+            {
+                signupError ? (<p className="text-red-600 mt-2 text-left">
+                     <i className="fa-regular fa-circle-xmark text-red-600 font-light"> </i>
+                {signupError}</p>) : null
             }
 
           {/* Login Button */}
