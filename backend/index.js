@@ -1,3 +1,5 @@
+require("dotenv").config()
+
 const express=require("express")
 const cors=require("cors")
 const nodemailer=require("nodemailer")
@@ -32,9 +34,6 @@ User.create({name:name, emailid:emailid, passid:passid})
 
 })
 
-// NOTE: your Login.jsx currently posts to "http://localhost:3000/" —
-// update it to "http://localhost:3000/login" to match this route,
-// or rename this route back to "/" if you'd rather change it here instead.
 app.post("/login",function(req,res){
 
     const emailid=req.body.emailid
@@ -74,16 +73,17 @@ app.get("/user/:emailid",function(req,res){
   })
 })
 
-// FIX: removed the semicolon that was here — it terminated the statement
-// and turned the following .then()/.catch() into invalid syntax, which
-// crashed the entire function on every request.
+if(!process.env.MONGO_URL){
+    console.log("MONGO_URL is missing — check your .env file (local) or Vercel env vars (deployed)")
+}
+
 mongoose.connect(process.env.MONGO_URL)
 .then(function(){
     console.log("DB Connected Successfully")
 })
 .catch(function(err){
     console.log("Failed to Connect",err)
-})
+})    
 
 const credential=mongoose.model("credential",{},"bulkmail")
 
@@ -197,7 +197,6 @@ app.post("/sendemail",function(req,res){
  
 })
  
-// NEW: return all sent history, most recent first
 app.get("/emailhistory",function(req,res){
     EmailHistory.find()
     .sort({date:-1})
@@ -210,9 +209,6 @@ app.get("/emailhistory",function(req,res){
     })
 })
 
-// FIX: app.listen only runs locally now. On Vercel, module.exports = app
-// is what actually gets invoked per request — without this line, Vercel
-// has nothing valid to run even after the syntax error is fixed.
 if(!process.env.VERCEL){
     app.listen(3000,function(){
         console.log("Server Starting...")

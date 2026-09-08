@@ -133,12 +133,12 @@ signupdetails.then(function(data){
               placeholder="Enter your email"
               className={`w-full border border-gray-300 rounded-lg py-2.5 sm:py-3 pl-11 pr-4 text-sm sm:text-base outline-none focus:ring-2 focus:ring-indigo-500 ${color? "outline-white" : "outline-red-600"}`}
             />
+          </div>
               {
                 para ? (<p className="text-red-600 mt-2 text-left">
                      <i className="fa-regular fa-circle-xmark text-red-600 font-light"> </i>
                 Please enter a valid email</p>): null
              } 
-          </div>
 
           {/* Password */}
           <label className="block mt-2 font-semibold text-left text-sm sm:text-base">
